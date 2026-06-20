@@ -12,7 +12,6 @@ import requests
 DATASET = "bronze"
 CURRENCIES_URL = "https://api.frankfurter.dev/v2/currencies"
 RATES_URL = "https://api.frankfurter.dev/v2/rates"
-PROVIDER_URL = "https://api.frankfurter.dev/v2/providers"
 
 
 def _client() -> bigquery.Client:
@@ -36,6 +35,8 @@ def fetch_data(url: str) -> dict | list:
     try:
         resp = requests.get(url, timeout=15)
         resp.raise_for_status()
+        if len(resp.json()) == 0:
+            raise ValueError("No data returned from API")
         return resp.json()
     except requests.exceptions.Timeout:
         print(f"Timeout fetching {url}")
@@ -102,9 +103,7 @@ def main():
     # rates:      overwrite=False → WRITE_APPEND (add rows to existing data)
     currencies_file = fetch_data(CURRENCIES_URL)
     rates_file = fetch_data(RATES_URL)
-    providers = fetch_data(PROVIDER_URL)
 
-    load_to_bq(providers, "raw_provider")
     load_to_bq(rates_file, "raw_rates")
     load_to_bq(currencies_file, "raw_currencies")
 

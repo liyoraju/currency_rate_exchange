@@ -1,1 +1,0 @@
-SELECT * FROM `bronze.raw_rates`

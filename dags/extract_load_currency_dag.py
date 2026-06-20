@@ -13,7 +13,7 @@ from extract_load.bronze_extract import (
 )
 
 
-@dag(schedule="@weekly", start_date=datetime(2026, 6, 20), catchup=False)
+@dag(schedule="@daily", start_date=datetime(2026, 6, 20), catchup=False)
 def etl_currencies():
 
     @task.python
@@ -22,7 +22,7 @@ def etl_currencies():
 
     @task.python
     def load_currencies(currencies_data):
-        load_to_bq(currencies_data, "currencies")
+        load_to_bq(currencies_data, "raw_currencies")
 
     currencies_info = extract_currencies()
     load_currencies(currencies_info)

@@ -18,7 +18,7 @@ def etl_rates():
 
     @task.python
     def load_rates(rates_data):
-        load_to_bq(rates_data, "rates")
+        load_to_bq(rates_data, "raw_rates")
 
     rates_info = extract_rates()
     load_rates(rates_info)

@@ -1,0 +1,10 @@
+
+sources:
+  - name: bronze
+    dataset: 'bronze'  
+    tables:
+      - name: raw_provider
+      - name: raw_rates
+      - name: raw_currencies
+
+
