@@ -22,7 +22,7 @@ def etl_rates():
 
     @task.bash
     def transform():
-        return "dbt run --select silver_rates && dbt test --select silver_rates && dbt run --select gold_daily_rates && dbt test --select gold_daily_rates"
+        return "cd /opt/airflow/dbt_currency && dbt run --select silver_rates && dbt test --select silver_rates && dbt run --select gold_daily_rates && dbt test --select gold_daily_rates"
 
     rates_info = extract_rates()
     load_task = load_rates(rates_info)
