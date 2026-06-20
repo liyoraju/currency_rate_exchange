@@ -24,8 +24,17 @@ def etl_currencies():
     def load_currencies(currencies_data):
         load_to_bq(currencies_data, "raw_currencies")
 
-    currencies_info = extract_currencies()
-    load_currencies(currencies_info)
+    @task.bash
+    def transform():
+        return (
+            "dbt run --select silver_currencies && dbt test --select silver_currencies"
+        )
+
+    rates_info = extract_currencies()
+    load_task = load_currencies(rates_info)
+    transform_task = transform()
+
+    load_task >> transform_task
 
 
 etl_currencies()

@@ -12,14 +12,4 @@ dbt_currency:
       threads: 1
       type: bigquery
   target: dev
-first_dbt:
-  outputs:
-    dev:
-      catalog: dbt
-      host: dbc-b7c0326f-6b25.cloud.databricks.com
-      http_path: /sql/1.0/warehouses/a72a5655451d76c9
-      schema: default
-      threads: 1
-      token: REVOKED_TOKEN
-      type: databricks
-  target: dev
+

@@ -20,8 +20,15 @@ def etl_rates():
     def load_rates(rates_data):
         load_to_bq(rates_data, "raw_rates")
 
+    @task.bash
+    def transform():
+        return "dbt run --select silver_rates && dbt test --select silver_rates && dbt run --select gold_daily_rates && dbt test --select gold_daily_rates"
+
     rates_info = extract_rates()
-    load_rates(rates_info)
+    load_task = load_rates(rates_info)
+    transform_task = transform()
+
+    load_task >> transform_task
 
 
 etl_rates()
