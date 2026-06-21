@@ -4,7 +4,7 @@ dbt_currency:
       dataset: 'default'
       job_execution_timeout_seconds: 1
       job_retries: 1
-      keyfile: /opt/airflow/gcp-key.json
+      keyfile: C:\Users\liyor\Documents\Data Engineer\currency_project\gcp-key.json
       location: US
       method: service-account
       priority: interactive

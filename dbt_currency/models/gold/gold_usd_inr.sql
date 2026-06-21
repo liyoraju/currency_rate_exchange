@@ -21,6 +21,5 @@ SELECT
   LAG(usd_to_inr) OVER (ORDER BY date ASC) AS prev_usd_to_inr,
   ROUND(
     (usd_to_inr - LAG(usd_to_inr) OVER (ORDER BY date ASC)) 
-    / LAG(usd_to_inr) OVER (ORDER BY date ASC) * 100
-  , 2) AS pct_change
+    / LAG(usd_to_inr) OVER (ORDER BY date ASC) * 100, 4) AS pct_change
 FROM combined

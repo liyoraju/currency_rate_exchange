@@ -7,7 +7,7 @@ SELECT
     LAG(r.rate) OVER(PARTITION BY c.iso_code ORDER BY r.date) AS previous_rate,
     ROUND(
         (r.rate - LAG(r.rate) OVER(PARTITION BY c.iso_code ORDER BY r.date))
-        /LAG(r.rate) OVER(PARTITION BY c.iso_code ORDER BY r.date) * 100 ,2
+        /LAG(r.rate) OVER(PARTITION BY c.iso_code ORDER BY r.date) * 100 ,4
     ) AS percentage_change
 FROM {{ref("silver_rates")}} r JOIN {{ref("silver_currencies")}} c
 ON r.target = c.iso_code
