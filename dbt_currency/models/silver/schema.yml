@@ -1,0 +1,33 @@
+version: 2
+
+models:
+  - name: silver_currencies
+    columns:
+      - name: iso_code
+        tests:
+          - unique
+          - not_null
+      - name: name
+        tests:
+          - not_null
+      - name: symbol
+        tests:
+          - not_null
+      - name: start_date
+        tests:
+          - not_null
+  - name: silver_rates
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: target
+        tests:
+          - not_null
+      - name: rate
+        tests:
+          - not_null
+      - name: base
+        tests:
+          - not_null
+

@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: gold_daily_rates
+    columns:
+      - name: date
+        tests:
+          - not_null
+      - name: target
+        tests:
+          - not_null
+      - name: rate
+        tests:
+          - not_null
+      - name: target_name
+        tests:
+          - not_null
+
