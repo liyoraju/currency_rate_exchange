@@ -26,10 +26,7 @@ def etl_currencies():
 
     @task.bash
     def transform():
-        return (
-            "cd /opt/airflow/dbt_currency && dbt run --select silver_currencies && dbt test --select silver_currencies"
-            "dbt run --select gold_usd_inr && dbt test --select gold_usd_inr"
-        )
+        return "cd /opt/airflow/dbt_currency && dbt run --select silver_currencies && dbt test --select silver_currencies"
 
     rates_info = extract_currencies()
     load_task = load_currencies(rates_info)
